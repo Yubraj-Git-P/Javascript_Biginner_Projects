@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator App</title>
+</head>
+
+<style>
+
+    body{
+        margin: 0;
+        padding: 0;
+        background-color: blueviolet;
+    }
+
+    .container{
+        display: flex;
+        justify-content: center;   
+        align-items: center;
+        
+        height: 100vh;
+    }
+
+    .quote-box{
+        background-color: burlywood;
+        padding: 25px  180px;
+        border-radius: 8px;
+    }
+
+
+    h2{
+        font-size: 30px;
+        line-height: 80px;    
+    }
+
+    .author{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: 200px;
+    }
+
+    #new-quote{
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    #tweet{
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+</style>
+
+<body>
+
+    <div class="container">
+
+    <div class="quote-box">
+
+        <h2>Quote of the day ..</h2>
+
+        <div class="quote">
+            "Quote....................................."
+        </div>
+
+        <div class="author">
+            ---author_name
+        </div>
+
+        <button id="new-quote">New Quote</button>
+
+        <button id="tweet">Tweet</button>
+
+    </div>
+
+    </div>
+
+
+
+    <script>
+
+        const api_url = " ";
+
+        async function getquote(url){
+            const response = await fetch(url);
+            var data = await response.json();
+            console.log(data);
+        }
+
+        getquote(api_url);
+
+
+
+    </script>
+
+
+    
+</body>
+</html>

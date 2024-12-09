@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+    }
+
+    .input-section {
+        margin-bottom: 20px;
+    }
+
+    #city-input {
+        width: 200px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    #search-button {
+        padding: 10px 15px;
+        border: none;
+        background-color: #007BFF;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-top: 40px;
+    }
+
+    #search-button:hover {
+        background-color: #0056b3;
+    }
+
+    .weather-result {
+        margin-top: 20px;
+    }
+
+    .data{
+        font-size: 20px;
+    }
+</style>
+
+
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+
+        <div class="input-section">
+            <input type="text" id="city-input" placeholder="Enter city name">
+            <button id="search-button">Get Weather</button>
+        </div>
+
+        <div id="weather-result" class="weather-result">
+            <!-- Weather information will be displayed here -->
+            <div class="city data">
+            
+            </div>
+
+            <br>
+
+            <div class="temp data">
+                
+            </div>
+
+            <br>
+
+            <div class="wind data">
+                
+            </div>
+
+            <br>
+
+            <div class="humidity data">
+                
+            </div>
+
+            <br>
+
+        </div>
+
+    </div>
+
+    <script>
+        const apiKey = "03988db90422b51794eb1df3ed21311c";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+        
+        const search_button = document.getElementById("search-button");
+
+
+        async function checkWeather(city) {
+
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+            var data = await response.json();
+
+            console.log(data);
+
+            // console.log(data.name);
+            // console.log(data.main.temp);
+            // console.log(data.wind.speed);
+            // console.log(data.main.humidity);
+
+            document.querySelector(".city").innerHTML = `City name : ${data.name}`;
+            document.querySelector(".temp").innerHTML = `Temperature: ${data.main.temp}`;
+            document.querySelector(".wind").innerHTML = `Wind : ${data.wind.speed}`;
+            document.querySelector(".humidity").innerHTML = `Humidity : ${data.main.humidity}`;
+
+        }
+
+        search_button.addEventListener("click", () => {
+
+            const city_input = document.getElementById("city-input").value;            
+
+             if (city_input)
+              { checkWeather(city_input); } 
+              
+             else { alert("Please provide city name : ") } 
+            
+            });
+
+    </script>
+
+</body>
+
+</html>

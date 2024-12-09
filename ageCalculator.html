@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator App Project</title>
+</head>
+
+
+
+<style>
+    body {
+        background-color: blueviolet;
+        height: 100vh;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background-color: rgb(164, 86, 236);
+        padding: 20px;
+        margin-left: -100px;
+        margin-top: -200px;
+        border-radius: 8px;
+
+    }
+
+    .container h1 {
+        color: white;
+        font-size: 50px;
+        line-height: 60px;
+    }
+
+    .container h1 span {
+        color: yellow;
+    }
+
+    .input-box {
+        background-color: rgb(138, 85, 187);
+        padding: 30px 50px;
+        border-radius: 8px;
+    }
+
+    input[type="date"] {
+
+        font-size: 20px;
+        padding: 10px 45px;
+        border-radius: 4px;
+    }
+
+    .container button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin-left: 8px;
+        color: white;
+        background-color: rgb(116, 9, 9);
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    #myDisplay {
+        margin-top: 40px;
+        color: white;
+        font-size: 25px;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <h1>JavaScript <br> <span>Age Calculator</span></h1>
+
+        <div class="input-box">
+            <div id="input-date">
+                <input type="date" id="date">
+
+                <button id="button">Calculate</button>
+            </div>
+
+            <p id="myDisplay"></p>
+        </div>
+    </div>
+
+
+    <script>
+
+
+
+        let userInput = document.getElementById("date");
+
+        // userInput.max = new Date().toISOString().split("T")[0]; // Make date selected upto
+
+        document.getElementById("button").addEventListener("click", calculateAge);
+
+        function calculateAge() {
+
+            let birthDate = new Date(userInput.value);
+
+            if (userInput.value === "") {
+                alert("Provide your Date of birth !");
+            }
+
+            // console.log(birthDate); no Output give
+
+            let d1 = birthDate.getDate();
+            let m1 = birthDate.getMonth() + 1;
+            let y1 = birthDate.getFullYear();
+
+            // console.log(d1,m1,y1;
+
+
+            let today = new Date();
+
+            // console.log(today); no Ouput give
+
+            let d2 = today.getDate();
+            let m2 = today.getMonth() + 1;
+            let y2 = today.getFullYear();
+
+            // console.log(d2,m3,y3);
+
+
+            // Now Calculating age :
+            let d3, m3, y3;
+
+            y3 = y2 - y1;
+
+            if (m2 >= m1) {
+                m3 = m2 - m1;
+            }
+            else {
+                y3--;
+                m3 = 12 + m2 - m1;
+            }
+
+            if (d2 >= d1) {
+                d3 = d2 - d1;
+            }
+            else {
+                m3--;
+                d3 = getDaysInMonth(y1, m1) + d2 - d1;
+            }
+
+            if (m3 < 0) {
+                m3 += 12;
+                y3--;
+            }
+
+            // console.log(y3);
+            // console.log(m3);
+            // console.log(d3);
+
+            document.getElementById("myDisplay").innerText = `You are ${y3} years old ${m3} months and ${d3} day's`;  // Notes here, backtick's were used  
+
+        }
+
+
+        // To calculate total day's in a particular month : 
+        function getDaysInMonth(year, month) {
+            return new Date(year, month, 0).getDate();
+            return;
+        }
+
+
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+<!-- 
+// Alternative :
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Age Calculator - Calculate age in years, months, and days">
+    <meta name="keywords" content="Age Calculator, JavaScript, Web App, HTML, CSS">
+    <title>Age Calculator</title>
+    Link to CSS file 
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<style>
+    /* General styles for the age calculator */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    /* Container styles */
+    .container {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 30px;
+        width: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    /* Input and button styles */
+    .input-container {
+        margin-bottom: 20px;
+    }
+
+    input[type="date"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    /* Result display styles */
+    #result {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #e8f5e9;
+        border: 1px solid #c8e6c9;
+        border-radius: 5px;
+    }
+
+    #ageResult {
+        font-size: 20px;
+        color: #2e7d32;
+    }
+</style>
+
+
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <div class="input-container">
+            <label for="dob">Enter your date of birth:</label>
+            <input type="date" id="dob" name="dob">
+            <button id="calculateBtn">Calculate Age</button>
+        </div>
+        <div id="result">
+            <p id="ageResult"></p>
+        </div>
+    </div>
+
+
+    <script>
+        // JavaScript code to handle the age calculation
+        document.getElementById('calculateBtn').addEventListener('click', calculateAge);
+
+        function calculateAge() {
+            // Get the user's date of birth from the input field
+            const dob = document.getElementById('dob').value;
+
+            // Check if the date of birth is selected
+            if (!dob) {
+                document.getElementById('ageResult').innerText = "Please enter your date of birth.";
+                return;
+            }
+
+            // Convert the input date to a Date object
+            const dobDate = new Date(dob);
+
+            // Get today's date
+            const today = new Date();
+
+            // Calculate the difference in years, months, and days
+            let years = today.getFullYear() - dobDate.getFullYear();
+            let months = today.getMonth() - dobDate.getMonth();
+            let days = today.getDate() - dobDate.getDate();
+
+            // Adjust the values if the current date is before the birth date in the current year or month
+            if (months < 0 || (months === 0 && days < 0)) {
+                years--; // Subtract one year if the birthday hasn't occurred yet this year
+                months += 12; // Add 12 months to get the correct number of months
+            }
+
+            // If the days are negative, adjust the month and day values
+            if (days < 0) {
+                const previousMonth = new Date(today.getFullYear(), today.getMonth(), 0); // Get the last day of the previous month
+                days += previousMonth.getDate(); // Add the days of the previous month to get the correct number of days
+                months--; // Subtract one month since we've adjusted the days
+            }
+
+            // Display the calculated age in years, months, and days
+            document.getElementById('ageResult').innerText = `Your age is: ${years} years, ${months} months, and ${days} days.`;
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+ -->
